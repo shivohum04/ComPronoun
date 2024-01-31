@@ -2,27 +2,29 @@ import librosa
 import numpy as np
 from fastdtw import fastdtw
 from scipy.spatial.distance import euclidean
+from getaudiofile import get_audio_file  # Import the function from get_audio_file.py
 
 def load_and_extract_features(file_path):
-    # Load the audio file
     y, sr = librosa.load(file_path)
-    # Extract MFCC features
     mfcc = librosa.feature.mfcc(y=y, sr=sr)
     return mfcc
 
 def compare_pronunciations(file_path1, file_path2):
-    # Load and extract features for both audio files
     mfcc1 = load_and_extract_features(file_path1)
     mfcc2 = load_and_extract_features(file_path2)
 
-    # Compare using DTW
     distance, _ = fastdtw(mfcc1.T, mfcc2.T, dist=euclidean)
     return distance
 
-# Example usage
-file_user = './audio/Act.wav'
-file_reference = './audio/Act.wav'
-distance = compare_pronunciations(file_user, file_reference)
+# Taking user input for word and user's audio file
+word = input("Enter the word: ")
+user_audio_file_path = input("Enter the path to your audio file: ")
 
-# Lower distance means better pronunciation accuracy
-print(f"Pronunciation similarity score: {distance}")
+# Fetch the reference audio file for the word
+reference_audio_file_path = get_audio_file(word)
+if reference_audio_file_path:
+    # Compare the user's pronunciation with the reference
+    distance = compare_pronunciations(user_audio_file_path, reference_audio_file_path)
+    print(f"Pronunciation similarity score: {distance}")
+else:
+    print("Reference audio file not found.")
