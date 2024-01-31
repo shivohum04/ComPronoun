@@ -1,0 +1,17 @@
+# Python Flask Backend
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+.build/
+
+# React Native Frontend
+node_modules/
+android/
+ios/
+*.log
+npm-debug.log*
+
+# Ignore .DS_Store files created by macOS
+.DS_Store
