@@ -15,3 +15,21 @@ npm-debug.log*
 
 # Ignore .DS_Store files created by macOS
 .DS_Store
+# Node.js
+node_modules/
+npm-debug.log
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyc
+
+# Temporary files
+temp/
+
+# IDE specific
+.vscode/
+.idea/
+*.swp
+*.swo
